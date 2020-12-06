@@ -1,8 +1,10 @@
 package com.hospital.almenara.controller;
 
-import com.hospital.almenara.entity.SchoolAgreement;
-import com.hospital.almenara.services.SchoolAgreementService;
+import com.hospital.almenara.entity.Plaza;
+import com.hospital.almenara.services.PlazaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,17 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/schools-agreements")
-public class SchoolAgreementController {
+@RequestMapping("/plazas")
+public class PlazaController {
 
     @Autowired
-    SchoolAgreementService service;
+    PlazaService service;
 
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN') OR hasRole('USER')")
-    public List<SchoolAgreement> find(){
-        return service.findAll();
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<List<Plaza>> find(){
+        return ResponseEntity.status(HttpStatus.OK).body(service.findAll());
     }
-
-
 }

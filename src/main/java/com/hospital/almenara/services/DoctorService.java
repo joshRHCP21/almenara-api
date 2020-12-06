@@ -2,9 +2,11 @@ package com.hospital.almenara.services;
 
 import com.hospital.almenara.entity.Doctor;
 import com.hospital.almenara.repository.DoctorRepository;
+import com.hospital.almenara.view.pdf.DoctorPdf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 @Service
@@ -44,5 +46,11 @@ public class DoctorService {
         if (doctor.getNumGroup() != null) updObj.setNumGroup(doctor.getNumGroup());
         if (doctor.getStatus() != null) updObj.setStatus(doctor.getStatus());
         return repository.save(updObj);
+    }
+
+    public ByteArrayOutputStream getListDoctorsPdf() {
+        List<Doctor> doctors = findAll();
+        DoctorPdf studentPdf = new DoctorPdf();
+        return studentPdf.getListDoctors(doctors);
     }
 }

@@ -1,5 +1,6 @@
 package com.hospital.almenara.services;
 
+import com.hospital.almenara.config.exception.NotFoundException;
 import com.hospital.almenara.entity.School;
 import com.hospital.almenara.repository.SchoolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,8 @@ public class SchoolService {
     }
 
     public School findById(Long id){
-        return repository.findById(id).orElse(null);
+        if (!repository.existsById(id)) throw new NotFoundException("School does not exist with id " + id);
+        return repository.getOne(id);
     }
 
     public School create(School school){
@@ -26,11 +28,12 @@ public class SchoolService {
     }
 
     public School update(School school, Long id){
-        School updObj = findById(id);
-        if (updObj == null) return null;
+        if (!repository.existsById(id)) throw new NotFoundException("School does not exist with id " + id);
+        School updObj = repository.getOne(id);
         if (school.getName() != null) updObj.setName(school.getName());
         if (school.getShortName() != null) updObj.setShortName(school.getShortName());
         if (school.getStatus() != null) updObj.setStatus(school.getStatus());
-        return repository.save(updObj);
+        repository.save(updObj);
+        return updObj;
     }
 }
