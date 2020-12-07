@@ -48,7 +48,7 @@ public class AuthController {
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
 
         if (!userRepository.existsByUsername(loginRequest.getUsername())) {
-            return ResponseEntity.status(HttpStatus.OK).body("Usuario no existente.");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuario no existente.");
         }
 
         Authentication authentication = authenticationManager.authenticate(
