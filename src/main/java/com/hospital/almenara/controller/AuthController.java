@@ -11,6 +11,7 @@ import com.hospital.almenara.repository.UserRepository;
 import com.hospital.almenara.security.jwt.JwtUtils;
 import com.hospital.almenara.security.services.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,7 +25,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = {"http://localhost:3000", "https://hospital-almenara-control-asistencia.netlify.app"})
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -47,7 +48,7 @@ public class AuthController {
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
 
         if (!userRepository.existsByUsername(loginRequest.getUsername())) {
-            return ResponseEntity.badRequest().body("No existe el usuario");
+            return ResponseEntity.status(HttpStatus.OK).body("Usuario no existente.");
         }
 
         Authentication authentication = authenticationManager.authenticate(
@@ -63,7 +64,10 @@ public class AuthController {
 
         return ResponseEntity.ok(new JwtResponse(jwt,
                 userDetails.getId(),
+                userDetails.getName(),
+                userDetails.getLastName(),
                 userDetails.getUsername(),
+                userDetails.getStatus(),
                 roles));
     }
 

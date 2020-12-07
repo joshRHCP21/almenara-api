@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = {"http://localhost:3000", "https://hospital-almenara-control-asistencia.netlify.app"})
 @RestController
 @RequestMapping("/doctors")
 public class DoctorController {
@@ -43,7 +44,7 @@ public class DoctorController {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.update(doctor, id));
     }
 
-    @GetMapping("/students/pdf")
+    @GetMapping("/pdf")
     public ResponseEntity<byte[]> getListStudentsPdf() {
         byte[] contents = service.getListDoctorsPdf().toByteArray();
         HttpHeaders headers = new HttpHeaders();

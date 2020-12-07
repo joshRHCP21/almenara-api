@@ -141,7 +141,7 @@ public class DoctorPdf {
                 cell.setHorizontalAlignment(Element.ALIGN_CENTER);
                 table.addCell(cell);
 
-                cell = new PdfPCell(new Phrase(String.valueOf(doctor.getSchoolAgreement().getSchool().getName()), cellFont));
+                cell = new PdfPCell(new Phrase(String.valueOf(doctor.getSchoolAgreement().getSchool().getShortName()), cellFont));
                 cell.setVerticalAlignment(Element.ALIGN_CENTER);
                 cell.setHorizontalAlignment(Element.ALIGN_CENTER);
                 table.addCell(cell);
