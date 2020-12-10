@@ -14,7 +14,7 @@ import java.util.Date;
 public class JwtUtils {
 	private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
-	private static int JWT_EXPIRATION_MS = 60 * 60 * 1000;
+	private static int JWT_EXPIRATION_MS = 4 * 60 * 60 * 1000;
 
 	@Value("${jwtSecret}")
 	private String jwtSecret;
