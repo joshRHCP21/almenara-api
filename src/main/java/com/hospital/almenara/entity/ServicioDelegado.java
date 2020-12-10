@@ -3,16 +3,16 @@ package com.hospital.almenara.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Data
-public class Specialty {
+public class ServicioDelegado {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    @ManyToMany
-    private List<Servicio> servicios;
+    @ManyToOne
+    private Servicio servicio;
+    @ManyToOne
+    private Mes mes;
 }

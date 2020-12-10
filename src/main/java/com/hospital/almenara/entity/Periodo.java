@@ -7,12 +7,15 @@ import java.util.List;
 
 @Entity
 @Data
-public class Specialty {
+public class Periodo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    @ManyToMany
-    private List<Servicio> servicios;
+    private String anioInicio;
+    private String anioFinal;
+    private String mesInicio;
+    private String mesFinal;
+    @OneToMany
+    private List<AnioAcademico> anioAcademicos;
 }
