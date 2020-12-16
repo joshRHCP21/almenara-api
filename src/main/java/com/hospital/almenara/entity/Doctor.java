@@ -31,11 +31,13 @@ public class Doctor implements Serializable {
     @ManyToOne
     private Specialty specialty;
     private Boolean status;
-    private String numGroup;
+    @ManyToOne
+    private Team team;
+    @ManyToOne
+    private Nivel nivel;
 
     @PrePersist
     public void prePersist(){
         status = true;
-        numGroup = "01";
     }
 }

@@ -22,7 +22,7 @@ public class DoctorController {
 
     @GetMapping
     @PreAuthorize("hasRole('ADMIN') OR hasRole('USER')")
-    public ResponseEntity<List<Doctor>> find(){
+    public ResponseEntity<List<Doctor>> find() {
         return ResponseEntity.status(HttpStatus.OK).body(service.findAll());
     }
 
@@ -42,6 +42,12 @@ public class DoctorController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Doctor> update(@RequestBody Doctor doctor, @PathVariable Long id){
         return ResponseEntity.status(HttpStatus.CREATED).body(service.update(doctor, id));
+    }
+
+    @GetMapping("/teamId/{teamId}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<List<Doctor>> findByTeamId(@PathVariable Long teamId){
+        return ResponseEntity.status(HttpStatus.OK).body(service.findAllByTeamId(teamId));
     }
 
     @GetMapping("/pdf")
