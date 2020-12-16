@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface ServicioDoctorRepository extends JpaRepository<ServicioDoctor, Long> {
-
+    
     List<ServicioDoctor> findAllByDoctorSpecialtyId(Long specialtyId);
 }
